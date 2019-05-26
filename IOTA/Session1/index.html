@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
+    <script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyAg2oCQs4Rz2_HDfXs8uiNBTRIoQgiJBCc",
+        authDomain: "myprject1-81a6a.firebaseapp.com",
+        databaseURL: "https://myprject1-81a6a.firebaseio.com",
+        projectId: "myprject1-81a6a",
+        storageBucket: "myprject1-81a6a.appspot.com",
+        messagingSenderId: "639819251230"
+    };
+    firebase.initializeApp(config);
+    </script>
+    <title>Page Title</title>
+</head>
+<body>
+    LOG-IN
+    <br>
+    <input type="text" placeholder="email">
+    <br>
+    <input type="password" placeholder="password">
+    <br><input type = "file" id="pic">
+    <button> 
+    Submit</button> 
+    <script>
+        var auth = firebase.auth()
+        var fireUser = null
+        function get_details(result){
+            fireUser = result.user
+            console.log(fireUser)
+        }
+
+        function disp_error(error){
+            console.log(error)
+        }
+
+        function login(username, password){
+            auth.signInWithEmailAndPassword(username, password).then(get_details).catch(disp_error)
+        }
+
+        function signup(username, password){
+            auth.createUserWithEmailAndPassword(username, password).then(get_details).catch(disp_error)
+        }
+
+        var provider = new firebase.auth.GoogleAuthProvider();
+
+        function initiate_google_signin(){
+            auth.signInWithPopup(provider).then(get_details).catch(disp_error)
+        }
+
+        var storage = firebase.storage();
+        var main_storageref = storage.ref();
+        var imageRef = main_storageref.child('images/');
+        document.getElementById("pic").addEventListener('change', function(){
+            pic_ref = this.files[0];
+            imageRef.put(pic_ref).then(function(snapshot){
+                console.log('file uploaded')
+            });
+        });
+
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+W = -20*pi : pi/100 : 20*pi;
+X = -2i*(3*(W.^2 - 2).*sin(W) - W.*(W.^2 - 6).*cos(W))./(W.^4);
+plot(W, real(X));
+hold on;
+plot(W, imag(X));
+title('Fourier Transform Theoretical X(W) = -2i*(3*(W.^2 - 2).*sin(W) - W.*(W.^2 - 6).*cos(W))./(W.^4)');
+xlabel('W');
+ylabel('X(W)');
+legend('Real','Imaginary');
+
+% W = -20*pi : pi/100 : 20*pi;
+% X = zeros(size(W));
+X(W <= pi & W >= -pi) = 1;
+% plot(W, real(X));
+% hold on;
+% plot(W, imag(X));
+% title('Fourier Transform Theoretical X(W) = rect(W)');
+% xlabel('W');
+% ylabel('X(W)');
+% legend('Real','Imaginary');

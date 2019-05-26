@@ -1,0 +1,2 @@
+// comment
+void myPrintHelloWorld();

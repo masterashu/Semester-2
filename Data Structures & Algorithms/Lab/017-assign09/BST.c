@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "BST.h"
+// Sample Comment
 
 StudentBST* CreateBST(Student* newStudent){
     StudentBST* newNode = (void*)malloc(sizeof(StudentBST));

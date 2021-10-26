@@ -14,55 +14,64 @@
     };
     firebase.initializeApp(config);
     </script>
+    <!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>Page Title</title>
 </head>
 <body>
-    LOG-IN
-    <br>
-    <input type="text" placeholder="email">
-    <br>
-    <input type="password" placeholder="password">
-    <br><input type = "file" id="pic">
-    <button> 
-    Submit</button> 
-    <script>
-        var auth = firebase.auth()
-        var fireUser = null
-        function get_details(result){
-            fireUser = result.user
-            console.log(fireUser)
-        }
+    <div class="d-flex justify-content-center">
+        LOG-IN
+    </div>
+    <div class="card" >
+        <div class="d-flex justify-content-center card-body">
+            <br>
+            <input type="text" placeholder="email">
+            <br>
+            <input type="password" placeholder="password">
+            <br><input type = "file" id="pic">
+            <button > 
+            Submit</button> 
+            <script>
+                var auth = firebase.auth()
+                var fireUser = null
+                function get_details(result){
+                    fireUser = result.user
+                    console.log(fireUser)
+                }
 
-        function disp_error(error){
-            console.log(error)
-        }
+                function disp_error(error){
+                    console.log(error)
+                }
 
-        function login(username, password){
-            auth.signInWithEmailAndPassword(username, password).then(get_details).catch(disp_error)
-        }
+                function login(username, password){
+                    auth.signInWithEmailAndPassword(username, password).then(get_details).catch(disp_error)
+                }
 
-        function signup(username, password){
-            auth.createUserWithEmailAndPassword(username, password).then(get_details).catch(disp_error)
-        }
+                function signup(username, password){
+                    auth.createUserWithEmailAndPassword(username, password).then(get_details).catch(disp_error)
+                }
 
-        var provider = new firebase.auth.GoogleAuthProvider();
+                var provider = new firebase.auth.GoogleAuthProvider();
 
-        function initiate_google_signin(){
-            auth.signInWithPopup(provider).then(get_details).catch(disp_error)
-        }
+                function initiate_google_signin(){
+                    auth.signInWithPopup(provider).then(get_details).catch(disp_error)
+                }
 
-        var storage = firebase.storage();
-        var main_storageref = storage.ref();
-        var imageRef = main_storageref.child('images/');
-        document.getElementById("pic").addEventListener('change', function(){
-            pic_ref = this.files[0];
-            imageRef.put(pic_ref).then(function(snapshot){
-                console.log('file uploaded')
-            });
-        });
+                var storage = firebase.storage();
+                var main_storageref = storage.ref();
+                var imageRef = main_storageref.child('images/');
+                document.getElementById("pic").addEventListener('change', function(){
+                    pic_ref = this.files[0];
+                    imageRef.put(pic_ref).then(function(snapshot){
+                        console.log('file uploaded')
+                    });
+                });
 
 
-    </script>
-
+            </script>
+        </div>
+    </div>
 </body>
 </html>
